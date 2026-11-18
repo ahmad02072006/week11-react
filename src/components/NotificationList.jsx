@@ -1,23 +1,17 @@
-const notifications = [
-  { id: 1, type: 'success', message: 'Profile updated successfully' },
-  { id: 2, type: 'warning', message: 'Password expires in 3 days' },
-  { id: 3, type: 'info', message: 'New lecture materials available' },
-];
+// Demonstrates rendering a keyed list and passing item data through props.
+import NotificationItem from './NotificationItem';
 
-function NotificationItem({ type, message }) {
-  const icon = type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
-  return (
-    <li>
-      {icon} {message}
-    </li>
-  );
-}
+const notifications = [
+  { id: 'profile', type: 'success', message: 'Profile updated successfully', time: '2m ago' },
+  { id: 'materials', type: 'info', message: 'New lecture materials are ready', time: '1h ago' },
+  { id: 'reminder', type: 'warning', message: 'Quiz closes this Friday', time: 'Today' },
+];
 
 function NotificationList() {
   return (
-    <ul>
-      {notifications.map((n) => (
-        <NotificationItem key={n.id} type={n.type} message={n.message} />
+    <ul className="notification-list" aria-label="Recent notifications">
+      {notifications.map(({ id, type, message, time }) => (
+        <NotificationItem key={id} type={type} message={message} time={time} />
       ))}
     </ul>
   );

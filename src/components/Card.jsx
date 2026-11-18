@@ -1,16 +1,20 @@
-function Card({ title, children }) {
+// Demonstrates children props and reusable semantic card composition.
+import { useId } from 'react';
+
+function Card({ id, number, title, description, children }) {
+  const titleId = useId();
+
   return (
-    <div
-      style={{
-        border: '1px solid #bae6fd',
-        borderRadius: 10,
-        padding: '16px 20px',
-        marginBottom: 16,
-      }}
-    >
-      <h3 style={{ marginBottom: 10 }}>{title}</h3>
-      {children}
-    </div>
+    <section className="demo-card" id={id} aria-labelledby={titleId}>
+      <div className="card-heading">
+        <span className="card-number">{number}</span>
+        <div>
+          <h3 id={titleId}>{title}</h3>
+          <p>{description}</p>
+        </div>
+      </div>
+      <div className="card-content">{children}</div>
+    </section>
   );
 }
 
